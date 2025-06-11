@@ -16,7 +16,7 @@ Este repositorio contiene la **documentación técnica, diagramas y análisis** 
   - **Almacenamiento**: S3 (AWS), Blob Storage (Azure), Cloud Storage (GCP).  
   - **Bases de Datos**: RDS (AWS), Azure SQL (Azure), Cloud SQL (GCP).  
 - **Tecnologías**: Microservicios, Kubernetes, CI/CD.  
-- [Ver Documentación Completa](/docs/README.md).  
+- [Ver Documentación Completa](/docs/Codigo_Fuente_(Estructura_Teorica).md).  
 
 ### 2. 📐 **Diagrama de Arquitectura**  
 ![Diagrama Cloud](https://miro.medium.com/v2/resize:fit:1400/1*5qOFfDnY5sQNJn0hD3QoBg.png)  
