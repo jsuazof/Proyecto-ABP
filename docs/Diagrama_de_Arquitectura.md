@@ -3,60 +3,53 @@ Aquí tienes un **diagrama de arquitectura cloud completo con todas las capas**,
 ```mermaid
 %%{init: {'theme': 'neutral', 'fontFamily': 'Arial', 'gantt': {'barHeight': 20}}}%%
 graph TD
-    %% ==================== CAPA DE CLIENTES ====================
-    A[Cliente Web] -->|HTTPS| B[CloudFront]
-    A2[Cliente Móvil] -->|API REST| B
-    A3[IoT Device] -->|MQTT| IOT[AWS IoT Core]
-
-    %% ==================== CAPA DE ENTREGA ====================
-    B --> C[S3 Bucket\n(Static Assets)]
-    B --> D[Application Load Balancer]
-    D --> E1[EC2 Auto Scaling\n(AZ1)]
-    D --> E2[EC2 Auto Scaling\n(AZ2)]
-
-    %% ==================== CAPA DE APLICACIÓN ====================
-    E1 --> F[Amazon RDS\n(PostgreSQL Multi-AZ)]
+    %% Clientes
+    A[Cliente Web] --> B[CloudFront]
+    A2[Cliente Móvil] --> B
+    A3[IoT Device] --> IOT[AWS IoT]
+  
+    %% Entrega de Contenido
+    B --> C[S3]
+    B --> D[ALB]
+  
+    %% Cómputo
+    D --> E1[EC2 AZ1]
+    D --> E2[EC2 AZ2]
+  
+    %% Bases de Datos
+    E1 --> F[RDS]
     E2 --> F
-    E1 --> G[ElastiCache Redis\n(Session Cache)]
-    E2 --> G
-    E1 --> H[Lambda\n(Async Tasks)]
-    H --> J[SQS/SNS]
-    J --> H
-
-    %% ==================== CAPA DE DATOS ====================
-    F --> K[Backup Automatizado\n(S3 + Glacier)]
-    G --> L[Backup Diario\n(S3)]
-    H --> M[CloudWatch Logs]
-
-    %% ==================== CAPA DE SEGURIDAD ====================
-    B --> N[WAF\n(Web Application Firewall)]
+    E1 --> G[Redis]
+  
+    %% Procesamiento
+    E1 --> H[Lambda]
+    H --> J[SQS]
+  
+    %% Seguridad
+    B --> N[WAF]
     D --> N
-    E1 --> O[IAM Roles\n(Least Privilege)]
-    E2 --> O
-    F --> P[KMS Encryption\n(At Rest)]
-    C --> P
+  
+    %% Estilos
+    class A,A2,A3 fill:#2ecc71,color:white
+    class B,C,D fill:#3498db,color:white
+    class E1,E2 fill:#e74c3c,color:white
+    class F,G fill:#9b59b6,color:white
+    class H,J fill:#f39c12,color:black
+    class N fill:#e67e22,color:white
+    class IOT fill:#1abc9c,color:white
+```
 
-    %% ==================== CAPA DE MONITOREO ====================
-    M --> Q[CloudWatch Alarms]
-    Q --> R[SNS Notifications\n(Slack/Email)]
-    Q --> S[AWS Auto Recovery]
+```mermaid
 
-    %% ==================== LEYENDAS ====================
-    style A fill:#2ecc71,color:white
-    style A2 fill:#2ecc71,color:white
-    style A3 fill:#2ecc71,color:white
-    style B fill:#3498db,color:white
-    style C fill:#3498db,color:white
-    style D fill:#3498db,color:white
-    style E1 fill:#e74c3c,color:white
-    style E2 fill:#e74c3c,color:white
-    style F fill:#9b59b6,color:white
-    style G fill:#9b59b6,color:white
-    style H fill:#f39c12,color:black
-    style IOT fill:#1abc9c,color:white
-    style N fill:#e67e22,color:white
-    style P fill:#e67e22,color:white
-    style Q fill:#95a5a6,color:black
+graph TD
+    subgraph "Capa de Clientes"
+    A[Web] --> B[CloudFront]
+    A2[Móvil] --> B
+    end
+  
+    subgraph "Capa de Seguridad"
+    B --> WAF
+    end
 ```
 
 ---
@@ -64,31 +57,37 @@ graph TD
 ### **Desglose por Capas Técnicas**:
 
 #### **1. Capa de Clientes** 🏃‍♂️
+
 - **Web/Móvil**: Acceso via HTTPS (TLS 1.3).
 - **IoT**: Protocolo MQTT seguro con AWS IoT Core.
 - *Decisión*: Terminación SSL en CloudFront para reducir carga en backend.
 
 #### **2. Capa de Entrega** 🌐
+
 - **CloudFront**: Cachea contenido en 300+ Edge Locations.
 - **ALB**: Enrutamiento basado en rutas (path-based routing).
 - *Decisión*: ALB sobre NLB para soportar WebSockets.
 
 #### **3. Capa de Aplicación** 🖥️
+
 - **EC2 Auto Scaling**: Escalado basado en métricas custom (ej: conexiones activas).
 - **Lambda**: Timeout configurado a 15 mins (máximo para procesos async).
 - *Decisión*: Redis sobre Memcached por persistencia opcional.
 
 #### **4. Capa de Datos** 🗃️
+
 - **RDS**: Backups automáticos con PITR (Point-in-Time Recovery).
 - **S3 Storage Classes**: Standard (acceso frecuente) + Glacier (archivo).
 - *Decisión*: Multi-AZ con failover automático (<30 segundos).
 
 #### **5. Capa de Seguridad** 🔐
+
 - **WAF**: Reglas contra OWASP Top 10 (SQLi, XSS).
 - **KMS**: Claves gestionadas por AWS (AWS-Managed Keys).
 - *Decisión*: IAM Roles en lugar de credenciales estáticas.
 
 #### **6. Capa de Monitoreo** 📊
+
 - **CloudWatch Alarms**: Umbrales para CPU (>80%), errores 5xx (>1%).
 - **Auto Recovery**: Reinicio automático de instancias EC2 fallidas.
 - *Decisión*: SNS para notificaciones multi-canal (Slack + SMS).
@@ -96,6 +95,7 @@ graph TD
 ---
 
 ### **Flujo Crítico (Ejemplo: Proceso de Pago)**:
+
 ```mermaid
 sequenceDiagram
     Cliente->>+CloudFront: POST /checkout
@@ -108,4 +108,3 @@ sequenceDiagram
 ```
 
 ---
-
