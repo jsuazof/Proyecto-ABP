@@ -1,4 +1,4 @@
-**diagrama de arquitectura cloud completo con todas las capas**, diseñado para mostrar el flujo de datos, componentes críticos y decisiones técnicas en detalle:
+**Diagrama de arquitectura cloud completo con todas las capas**, diseñado para mostrar el flujo de datos, componentes críticos y decisiones técnicas en detalle:
 
 ```mermaid
 %%{init: {'theme': 'neutral', 'fontFamily': 'Arial', 'gantt': {'barHeight': 20}}}%%
