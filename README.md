@@ -19,16 +19,15 @@ Este repositorio contiene la **documentación técnica, diagramas y análisis** 
 - [Ver Documentación Completa](/docs/Codigo_Fuente_(Estructura_Teorica).md).  
 
 ### 2. 📐 **Diagrama de Arquitectura**  
-![Diagrama Cloud](https://miro.medium.com/v2/resize:fit:1400/1*5qOFfDnY5sQNJn0hD3QoBg.png)  
 - **Componentes**:  
   - Frontend: CDN + Almacenamiento estático.  
   - Backend: Contenedores en EKS/AKS/GKE.  
   - Autenticación: Cognito (AWS) / Firebase (GCP).  
-- [Ver Diagrama Detallado](/docs/architecture_diagram.drawio).  
+- [Ver Diagrama Detallado](/docs/Diagrama_de_Arquitectura.md).  
 
-### 3. 🔍 **Análisis de Casos**  
-- **Caso Retail (Falabella/Ripley)**: [Ver PDF](/docs/caso_retail_chile.pdf).  
-- **Caso Startup Tech**: [Ver Markdown](/docs/caso_startup_tech.md).  
+### 3. 🔍 **Informe de Pruebas**  
+- **Informe de pruebas unitarias y cargas realizadas, incluye resultados obtenidos y   resolucion de problemas.**: [Ver PDF](/docs/Informe_de_pruebas.pdf).  
+
 
 ### 4. 📊 **Presentación Final**  
 - Resumen ejecutivo, desafíos y lecciones aprendidas.  
