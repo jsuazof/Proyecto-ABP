@@ -26,7 +26,7 @@ Este repositorio contiene la **documentación técnica, diagramas y análisis** 
 - [Ver Diagrama Detallado](/docs/Diagrama_de_Arquitectura.md).  
 
 ### 3. 🔍 **Informe de Pruebas**  
-- **Informe de pruebas unitarias y cargas realizadas, incluye resultados obtenidos y   resolucion de problemas.**: [Ver PDF](/docs/Informe_de_pruebas.pdf).  
+- **Informe de pruebas unitarias y cargas realizadas, incluye resultados obtenidos y   resolucion de problemas.**: [Ver Informe](/docs/Informe_de_pruebas.md).  
 
 
 ### 4. 📊 **Presentación Final**  
@@ -38,9 +38,7 @@ Este repositorio contiene la **documentación técnica, diagramas y análisis** 
 ## 🚀 **Cómo Usar Este Repositorio**  
 1. **Explorar Documentación**:  
    - La carpeta `/docs` contiene toda la teoría y decisiones técnicas.  
-2. **Ver Diagramas**:  
-   - Editar con [Draw.io](https://draw.io) (archivos `.drawio`).  
-3. **Revisar Análisis**:  
+2. **Revisar Análisis**:  
    - Comparativas de proveedores cloud en `/docs/casos`.  
 
 ---
