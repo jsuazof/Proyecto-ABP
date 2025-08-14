@@ -1,0 +1,17 @@
+# Presentación Final - Proyecto ABP
+## Sistema de Reservas en la Nube
+
+**NOTA**: Este es un archivo placeholder. 
+Para generar el PDF real, utiliza herramientas como:
+- Pandoc: `pandoc presentacion.md -o proyecto_cloud.pdf`
+- Google Slides exportado como PDF
+- PowerPoint exportado como PDF
+
+## Contenido Sugerido:
+1. Introducción al Proyecto
+2. Arquitectura Propuesta
+3. Servicios Cloud Utilizados
+4. Comparativa de Proveedores
+5. Desafíos y Soluciones
+6. Lecciones Aprendidas
+7. Conclusiones
